@@ -49,6 +49,9 @@ def main():
 	# Best
 	qcov = [1e-4]
 	rcov = [1000]
+	# Trust prediction
+	qcov = [1e-8]
+	rcov = [1000]
 	x, y, z = generateTestData()
 	fig = figure()
 	ax = fig.gca(projection='3d')
