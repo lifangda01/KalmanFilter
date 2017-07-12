@@ -15,16 +15,16 @@ def generateTestData():
 def test(x, y, z, qcov, rcov):
 	# Initializations
 	dt = 1 									# Measurement interval (s)
-	I3 = identity(3)
+	I =lambda x: identity(x)
 	A = zeros((9,9)) 						# Transition matrix
-	A[0:3, 0:3] = I3
-	A[0:3, 3:6] = I3 * dt
-	A[0:3, 6:9] = I3 * 0.5 * dt * dt
-	A[3:6, 3:6] = I3
-	A[3:6, 6:9] = I3 * dt
-	A[6:9, 6:9] = I3
+	A[0:3, 0:3] = I(3)
+	A[0:3, 3:6] = I(3) * dt
+	A[0:3, 6:9] = I(3) * 0.5 * dt * dt
+	A[3:6, 3:6] = I(3)
+	A[3:6, 6:9] = I(3) * dt
+	A[6:9, 6:9] = I(3)
 	H = zeros((3,9)) 						# Measurement matrix
-	H[0:3, 0:3] = I3
+	H[0:3, 0:3] = I(3)
 	Q = identity(9) * qcov					# Transition covariance
 	R = identity(3) * rcov					# Noise covariance
 	B = identity(9)							# Control matrix
@@ -46,10 +46,10 @@ def main():
 	# Compare over R
 	qcov = [1e-2, 1e-2]
 	rcov = [1, 10000]
-	# Best
+	# Best balance
 	qcov = [1e-4]
 	rcov = [1000]
-	# Trust prediction
+	# Trust only prediction
 	qcov = [1e-8]
 	rcov = [1000]
 	x, y, z = generateTestData()
